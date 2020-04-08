@@ -1,0 +1,17 @@
+This is the README file.
+
+Go to main project folder:
+Type 'make' to build executable
+Type 'make run' to run the project
+Type 'make clean' to remove class files and manifest
+
+
+
+
+
+
+Go to Project Folder and run the following commands
+
+javac -cp ./:./ojdbc8.jar Main.java
+jar cfmv Main.jar Manifest.txt Main.class
+java -jar Main.jar
