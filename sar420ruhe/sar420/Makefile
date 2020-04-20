@@ -1,7 +1,7 @@
 # Makefile for 241 Project
 #
 JCC = javac
-JARFILE = myProject
+JARFILE = sar420.jar
 
 sources = $(wildcard *.java)
 classes = $(sources:.java=.class)
