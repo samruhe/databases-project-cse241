@@ -14,5 +14,5 @@ Type 'make clean' to remove class files and manifest
 Go to Project Folder and run the following commands
 
 javac -cp ./:./ojdbc8.jar Main.java
-jar cfmv Main.jar Manifest.txt Main.class
-java -jar Main.jar
+jar cfmv sar420.jar Manifest.txt Main.class
+java -jar sar420.jar
