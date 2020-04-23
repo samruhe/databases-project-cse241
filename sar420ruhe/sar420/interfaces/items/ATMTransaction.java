@@ -3,7 +3,7 @@ package interfaces.items;
 import java.util.Scanner;
 
 import io.IOHandler;
-import interfaces.items.Deposit;
+import interfaces.items.CheckBalance;
 import interfaces.items.Withdraw;
 
 public class ATMTransaction {
@@ -15,14 +15,14 @@ public class ATMTransaction {
 
     public static void menu() {
         Scanner in = new Scanner(System.in);
-        System.out.println("\nWould you like to make a deposit or withdraw?");
-        System.out.println("\t1: Deposit");
-        System.out.println("\t2: Withdraw");
-        System.out.print("> ");
+        IOHandler.print("\nWould you like to make a deposit or withdraw?");
+        IOHandler.print("\t1: Check Balance");
+        IOHandler.print("\t2: Withdraw");
+        IOHandler.printPrompt();
 
         int menuSelection = IOHandler.getMenuSelection(in, NUM_MENUS);
 
-        if (menuSelection == 1) System.out.println("Deposit");
+        if (menuSelection == 1) CheckBalance.checkBalance(in);
         else if (menuSelection == 2) System.out.println("Withdraw");
     }
 }
