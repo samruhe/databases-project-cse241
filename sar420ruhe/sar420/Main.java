@@ -2,22 +2,32 @@ import java.io.*;
 import java.sql.*;
 import java.util.Scanner;
 
+import interfaces.DepositWithdraw;
+import io.IOHandler;
+
 class Main {
+    private final static int NUM_INTERFACES = 2;
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
         boolean loggedIn = false;
         do {
-            String[] creds = getCreds(in);
+            String[] creds = IOHandler.getCreds(in);
             try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@edgar1.cse.lehigh.edu:1521:cse241", creds[0], creds[1]);
-                    PreparedStatement selectInstructor = conn.prepareStatement("SELECT to_char(i_id, '00000') AS i_id, instructor.name AS i_name, to_char(s_id, '00000') AS s_id, student.name AS s_name FROM instructor, advisor, student WHERE instructor.id=advisor.i_id AND student.id=advisor.s_id AND instructor.dept_name=? ORDER BY i_id, s_id");
-                    PreparedStatement selectDepartments = conn.prepareStatement("SELECT dept_name FROM department WHERE dept_name LIKE ?");
-                    PreparedStatement checkDepartment = conn.prepareStatement("SELECT dept_name FROM department WHERE dept_name=?");
+                    // PreparedStatement selectInstructor = conn.prepareStatement("");
+                    // PreparedStatement selectDepartments = conn.prepareStatement("");
+                    // PreparedStatement checkDepartment = conn.prepareStatement("");
             ) {
                 loggedIn = true;
 
-                // searchDepartments(in, selectDepartments);
-                // checkDepartment(in, checkDepartment, selectInstructor);
+                System.out.println("\nPlease select an interface option by typing the number: ");
+                System.out.println("\t1: Deposit/Withdraw");
+                System.out.println("\t2: Purchases");
+                System.out.print("> ");
+
+                int interfaceSelection = IOHandler.getMenuSelection(in, NUM_INTERFACES);
+                if (interfaceSelection == 1) depositWithdrawInterface();
+                else if (interfaceSelection == 2) pruchaseInterface();
 
             } catch (SQLException sqle) {
                 if (sqle.toString().contains("invalid username/password"))
@@ -30,22 +40,12 @@ class Main {
         in.close();
     }
 
-    private static String[] getCreds(Scanner in) {
-        Console cnsl = System.console();
-        String[] creds = new String[2];
+    private static void depositWithdrawInterface() {
+        DepositWithdraw.menu();
+    }
 
-        System.out.print("Enter Oracle user id: ");
-        String username = in.nextLine();
-        System.out.print("Enter Oracle password for " + username + ": ");
-        
-        // Uncomment next line and comment next two lines if you want password visible when entered
-        // String password = in.nextLine();
-        char[] pass = cnsl.readPassword();
-        String password = String.copyValueOf(pass);
-        creds[0] = username;
-        creds[1] = password;
+    private static void pruchaseInterface() {
 
-        return creds;
     }
 
 }
