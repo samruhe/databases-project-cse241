@@ -1,4 +1,4 @@
-package interfaces;
+package interfaces.items;
 
 public class Withdraw {
     public Withdraw() {

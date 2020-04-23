@@ -3,8 +3,8 @@ package interfaces;
 import java.util.Scanner;
 
 import io.IOHandler;
-import interfaces.ATMTransaction;
-import interfaces.TellerTransaction;
+import interfaces.items.ATMTransaction;
+import interfaces.items.TellerTransaction;
 
 public class DepositWithdraw {
     private final static int NUM_MENUS = 2;

@@ -1,10 +1,10 @@
-package interfaces;
+package interfaces.items;
 
 import java.util.Scanner;
 
 import io.IOHandler;
-import interfaces.Deposit;
-import interfaces.Withdraw;
+import interfaces.items.Deposit;
+import interfaces.items.Withdraw;
 
 public class ATMTransaction {
     private final static int NUM_MENUS = 2;
