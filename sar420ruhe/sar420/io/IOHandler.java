@@ -32,8 +32,8 @@ public class IOHandler {
         int input = 0;
         while (true) {
             if (!in.hasNextInt()) {
-                System.out.println("Please select an option by inputing the correct number.");
-                System.out.print("> ");
+                print("Please select an option by inputing the correct number.");
+                printPrompt();
                 in.next();
                 continue;
             }
@@ -41,9 +41,98 @@ public class IOHandler {
             input = in.nextInt();
             if (input > 0 && input <= maxItems) return input;
             else {
-                System.out.println("Please select an option by inputing the correct number.");
-                System.out.print("> ");
+                print("Please select an option by inputing the correct number.");
+                printPrompt();
             }
         }
+    }
+
+    public static String getCardNumber(Scanner in) {
+        in.nextLine();
+        String input = "";
+        while (true) {
+            input = in.nextLine();
+            if (input.trim().length() == 16) {
+                try {
+                    Long.parseLong(input);
+                    return input.trim();
+                } catch (NumberFormatException ex) {
+                    print("Please enter a valid card number, with no spaces");
+                    printPrompt();
+                }
+            }
+            else {
+                print("Please enter A valid card number, with no spaces");
+                printPrompt();
+            }
+        }
+    }
+
+    public static String getCardExpiration(Scanner in) {
+        String input = "";
+        while (true) {
+            input = in.nextLine();
+            if (input.trim().length() == 4) {
+                try {
+                    Integer.parseInt(input);
+                    return input.trim();
+                } catch (NumberFormatException ex) {
+                    print("Please enter the expiration data in the format 'MMYY'");
+                    printPrompt();
+                }
+            }
+            else {
+                print("Please enter the expiration data in the format 'MMYY'");
+                printPrompt();
+            }
+        }
+    }
+
+    public static String getCardSecurity(Scanner in) {
+        String input = "";
+        while (true) {
+            input = in.nextLine();
+            if (input.trim().length() == 3) {
+                try {
+                    Integer.parseInt(input);
+                    return input.trim();
+                } catch (NumberFormatException ex) {
+                    print("Please enter a valid security code");
+                    printPrompt();
+                }
+            }
+            else {
+                print("Please enter a valid secuirty code");
+                printPrompt();
+            }
+        }
+    }
+
+    public static String getCardPin(Scanner in) {
+        String input = "";
+        while (true) {
+            input = in.nextLine();
+            if (input.trim().length() > 0 && input.trim().length() <= 10) {
+                try {
+                    Integer.parseInt(input);
+                    return input.trim();
+                } catch (NumberFormatException ex) {
+                    print("Please enter a valid pin");
+                    printPrompt();
+                }
+            }
+            else {
+                print("Please enter a valid pin");
+                printPrompt();
+            }
+        }
+    }
+
+    public static void print(String line) {
+        System.out.println(line);
+    }
+
+    public static void printPrompt() {
+        System.out.print("> ");
     }
 }
