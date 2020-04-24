@@ -171,7 +171,7 @@ public class IOHandler {
                     return input;
                 } else {
                     print("Please enter a whole number that is a multiple of 20");
-                    printPrompt();
+                    System.out.print("> $");
                 }
             } else return input;
         }
