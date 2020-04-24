@@ -18,19 +18,19 @@ public class CheckBalance {
             IOHandler.print("---------------------------------------------");
             IOHandler.print("Please enter your card number, without spaces");
             IOHandler.printPrompt();
-            String cardNumber = IOHandler.getCardNumber(in);
+            String cardNumber = IOHandler.getCardNumber();
 
             IOHandler.print("Please enter your expiration date in the form, 'MMYY'");
             IOHandler.printPrompt();
-            String cardExp = IOHandler.getCardExpiration(in);
+            String cardExp = IOHandler.getCardExpiration();
 
             IOHandler.print("Please enter your security code");
             IOHandler.printPrompt();
-            String cardSecurity = IOHandler.getCardSecurity(in);
+            String cardSecurity = IOHandler.getCardSecurity();
 
             IOHandler.print("Please enter your pin");
             IOHandler.printPrompt();
-            String cardPin = IOHandler.getCardPin(in);
+            String cardPin = IOHandler.getCardPin();
 
             success = runSQL(cardNumber, cardExp, cardSecurity, cardPin, db);
         } while (!success);
