@@ -20,16 +20,21 @@ class Main {
             ) {
                 loggedIn = true;
                 Connection db = conn;
+                do {
+                    IOHandler.print("\nPlease select an interface option by typing the number: ");
+                    IOHandler.print("\t1: Deposit/Withdraw");
+                    IOHandler.print("\t2: Purchases");
+                    IOHandler.print("\tq: Quit");
+                    IOHandler.printPrompt();
 
-                IOHandler.print("\nPlease select an interface option by typing the number: ");
-                IOHandler.print("\t1: Deposit/Withdraw");
-                IOHandler.print("\t2: Purchases");
-                IOHandler.print("\tq: Quit");
-                IOHandler.printPrompt();
-
-                int interfaceSelection = IOHandler.getMenuSelection(in, false, NUM_INTERFACES);
-                if (interfaceSelection == 1) DepositWithdraw.menu(in, db);
-                else if (interfaceSelection == 2) System.out.println("pruchaseInterface()");
+                    int interfaceSelection = IOHandler.getMenuSelection(in, false, NUM_INTERFACES);
+                    if (interfaceSelection == 1) DepositWithdraw.menu(in, db);
+                    else if (interfaceSelection == 2) System.out.println("purchaseInterface()");
+                    else if (interfaceSelection == 0) {
+                        IOHandler.print("\nThank you.");
+                        System.exit(0);
+                    }
+                } while (true);
 
             } catch (SQLException sqle) {
                 if (sqle.toString().contains("invalid username/password"))

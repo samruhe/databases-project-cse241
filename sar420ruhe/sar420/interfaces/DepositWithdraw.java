@@ -16,22 +16,24 @@ public class DepositWithdraw {
     }
 
     public static void menu (Scanner in, Connection db) {
-        IOHandler.print("\nWould you like to use an ATM or a teller, please enter a number:");
-        IOHandler.print("\t1: ATM");
-        IOHandler.print("\t2: Teller");
-        IOHandler.print("\tb: Back");
-        IOHandler.print("\tq: Quit");
-        IOHandler.printPrompt();
+        do {
+            IOHandler.print("\nWould you like to use an ATM or a teller, please enter a number:");
+            IOHandler.print("\t1: ATM");
+            IOHandler.print("\t2: Teller");
+            IOHandler.print("\tb: Back");
+            IOHandler.print("\tq: Quit");
+            IOHandler.printPrompt();
 
-        // Scanner in = new Scanner(System.in);
-        int menuSelection = IOHandler.getMenuSelection(in, true, NUM_MENUS);
-        
-        if (menuSelection == 1) ATMTransaction.menu(in, db);
-        else if (menuSelection == 2) TellerTransaction.menu();
-        else if (menuSelection == 9) return;
-        else if (menuSelection == 0) {
-            IOHandler.print("Thank you for using the deposit/withdraw interface.");
-            System.exit(0);
-        }
+            // Scanner in = new Scanner(System.in);
+            int menuSelection = IOHandler.getMenuSelection(in, true, NUM_MENUS);
+            
+            if (menuSelection == 1) ATMTransaction.menu(in, db);
+            else if (menuSelection == 2) TellerTransaction.menu();
+            else if (menuSelection == 9) return;
+            else if (menuSelection == 0) {
+                IOHandler.print("\nThank you for using the deposit/withdraw interface.");
+                System.exit(0);
+            }
+        } while (true);
     }
 }

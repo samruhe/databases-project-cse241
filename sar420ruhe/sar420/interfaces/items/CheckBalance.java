@@ -33,6 +33,19 @@ public class CheckBalance {
             String cardPin = IOHandler.getCardPin(in);
 
             success = runSQL(cardNumber, cardExp, cardSecurity, cardPin, db);
+            if (!success) {
+                IOHandler.print("\nWould you like to:");
+                IOHandler.print("\t1: Continue");
+                IOHandler.print("\tb: Back");
+                IOHandler.print("\tq: Quit");
+                int menuSelection = IOHandler.getMenuSelection(in, true, 1);
+
+                if (menuSelection == 9) return;
+                else if (menuSelection == 0) {
+                    IOHandler.print("\nThank you for using the ATM.");
+                    System.exit(0);
+                }
+            }
         } while (!success);
     }
 
@@ -51,7 +64,7 @@ public class CheckBalance {
                 return true;
             } else {
                 IOHandler.print("\nThere is no account matching the entered card information.");
-                IOHandler.print("Please try re-entering the card information");
+                // IOHandler.print("Please try re-entering the card information");
                 return false;
             }
         } catch (SQLException ex) {
