@@ -28,8 +28,8 @@ public class DepositWithdraw {
             int menuSelection = IOHandler.getMenuSelection(in, true, NUM_MENUS);
             
             if (menuSelection == 1) ATMTransaction.menu(in, db);
-            else if (menuSelection == 2) TellerTransaction.menu();
-            else if (menuSelection == 9) return;
+            else if (menuSelection == 2) TellerTransaction.menu(in, db);
+            else if (menuSelection == -1) return;
             else if (menuSelection == 0) {
                 IOHandler.print("\nThank you for using the deposit/withdraw interface.");
                 System.exit(0);

@@ -37,7 +37,7 @@ public class IOHandler {
                     in.close();
                     return 0;
                 } else if (input.equals("b") && backAllowed) {
-                    return 9;
+                    return -1;
                 } else {
                     try {
                         int inputNum = Integer.parseInt(input);
@@ -174,6 +174,39 @@ public class IOHandler {
                     System.out.print("> $");
                 }
             } else return input;
+        }
+    }
+
+    public static double getDepositAmount(Scanner in) {
+        Double input = 0.0;
+        while (true) {
+            try {
+                input = in.nextDouble();
+                return input;
+            } catch (InputMismatchException ex) {
+                print("Please enter a valid number");
+                printPrompt();
+                continue;
+            }
+        }
+    }
+
+    public static String getCustomerID(Scanner in) {
+        String input = "";
+        while (true) {
+            input = in.nextLine();
+            if (input.trim().length() == 10) {
+                try {
+                    Long.parseLong(input);
+                    return input.trim();
+                } catch (NumberFormatException ex) {
+                    print("Please enter a valid ID");
+                    printPrompt();
+                }
+            } else {
+                print("Please enter a valid ID");
+                printPrompt();
+            }
         }
     }
 

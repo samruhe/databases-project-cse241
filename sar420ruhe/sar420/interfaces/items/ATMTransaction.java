@@ -44,7 +44,7 @@ public class ATMTransaction {
         } while (!success);
 
         do {
-            IOHandler.print("\nWould you like to make a deposit or withdraw?");
+            IOHandler.print("\nWould you like to check your balance or make a withdraw?");
             IOHandler.print("\t1: Check Balance");
             IOHandler.print("\t2: Withdraw");
             IOHandler.print("\tb: Back");
@@ -58,7 +58,7 @@ public class ATMTransaction {
                 Withdraw.withdraw(in, cardNumber, cardExp, cardSecurity, cardPin, db, true);
                 return;
             }
-            else if (menuSelection == 9) return;
+            else if (menuSelection == -1) return;
             else if (menuSelection == 0) {
                 IOHandler.print("\nThank you for using the ATM.");
                 System.exit(0);
