@@ -47,19 +47,14 @@ public class IOHandler {
         }
     }
 
-    public static String getCardNumber(Scanner in) {
-        in.nextLine();
-        String input = "";
+    public static String getCardNumber() {
+        Scanner in = new Scanner(System.in);
+        long input = 0;
         while (true) {
-            input = in.nextLine();
-            if (input.trim().length() == 16) {
-                try {
-                    Long.parseLong(input);
-                    return input.trim();
-                } catch (NumberFormatException ex) {
-                    print("Please enter a valid card number, with no spaces");
-                    printPrompt();
-                }
+            input = in.nextLong();
+            if (String.valueOf(input).length() == 16) {
+                in.close();
+                return String.valueOf(input);
             }
             else {
                 print("Please enter A valid card number, with no spaces");
@@ -68,13 +63,15 @@ public class IOHandler {
         }
     }
 
-    public static String getCardExpiration(Scanner in) {
+    public static String getCardExpiration() {
+        Scanner in = new Scanner(System.in);
         String input = "";
         while (true) {
             input = in.nextLine();
             if (input.trim().length() == 4) {
                 try {
                     Integer.parseInt(input);
+                    in.close();
                     return input.trim();
                 } catch (NumberFormatException ex) {
                     print("Please enter the expiration data in the format 'MMYY'");
@@ -88,13 +85,15 @@ public class IOHandler {
         }
     }
 
-    public static String getCardSecurity(Scanner in) {
+    public static String getCardSecurity() {
+        Scanner in = new Scanner(System.in);
         String input = "";
         while (true) {
             input = in.nextLine();
             if (input.trim().length() == 3) {
                 try {
                     Integer.parseInt(input);
+                    in.close();
                     return input.trim();
                 } catch (NumberFormatException ex) {
                     print("Please enter a valid security code");
@@ -108,13 +107,15 @@ public class IOHandler {
         }
     }
 
-    public static String getCardPin(Scanner in) {
+    public static String getCardPin() {
+        Scanner in = new Scanner(System.in);
         String input = "";
         while (true) {
             input = in.nextLine();
             if (input.trim().length() > 0 && input.trim().length() <= 10) {
                 try {
                     Integer.parseInt(input);
+                    in.close();
                     return input.trim();
                 } catch (NumberFormatException ex) {
                     print("Please enter a valid pin");
