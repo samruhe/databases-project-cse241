@@ -26,74 +26,100 @@ public class IOHandler {
         return creds;
     }
 
-    public static int getMenuSelection(Scanner in, int maxItems) {
-        // Scanner in = new Scanner(System.in);
+    public static int getMenuSelection(Scanner in, boolean backAllowed, int maxItems) {
+        String input = "";
 
-        int input = 0;
-        while (true) {
-            if (!in.hasNextInt()) {
-                print("Please select an option by inputing the correct number.");
+        do {
+            if (in.hasNext()) {
+                input = in.nextLine().trim();
+                if (input.equals("q")) {
+                    in.close();
+                    return 0;
+                } else if (input.equals("b") && backAllowed) {
+                    return 9;
+                } else {
+                    try {
+                        int inputNum = Integer.parseInt(input);
+                        if (inputNum > 0 && inputNum <= maxItems) return inputNum;
+                        else {
+                            print("Please select a valid option by inputing the correct number or letter");
+                            printPrompt();
+                        }
+                    } catch (NumberFormatException ex) {
+                        print("Please select a valid option by inputing the correct number or letter");
+                        printPrompt();
+                    }
+                }
+            } else {
+                print("Please select a valid option by inputing the correct number or letter");
                 printPrompt();
-                in.next();
+            }
+        } while (true);
+    }
+
+    public static String getCardNumber(Scanner in) {
+        // Scanner in = new Scanner(System.in);
+        // if (in.hasNextLine()) {
+        //     in.nextLine();
+        // }
+        long input = 0;
+        while (true) {
+            if (!in.hasNextLong()) {
+                print("Please enter a valid card number, with no spaces");
+                printPrompt();
+                in.nextLine();
                 continue;
             }
 
-            input = in.nextInt();
-            if (input > 0 && input <= maxItems) return input;
-            else {
-                print("Please select an option by inputing the correct number.");
-                printPrompt();
-            }
-        }
-    }
-
-    public static String getCardNumber() {
-        Scanner in = new Scanner(System.in);
-        long input = 0;
-        while (true) {
             input = in.nextLong();
             if (String.valueOf(input).length() == 16) {
-                in.close();
+                // in.close();
                 return String.valueOf(input);
             }
             else {
-                print("Please enter A valid card number, with no spaces");
+                print("Please enter a valid card number, with no spaces");
                 printPrompt();
             }
         }
     }
 
-    public static String getCardExpiration() {
-        Scanner in = new Scanner(System.in);
+    public static String getCardExpiration(Scanner in) {
+        // Scanner in = new Scanner(System.in);
+        // if (in.hasNextLine()) {
+        //     in.nextLine();
+        // }
         String input = "";
         while (true) {
             input = in.nextLine();
             if (input.trim().length() == 4) {
                 try {
                     Integer.parseInt(input);
-                    in.close();
+                    // in.close();
                     return input.trim();
                 } catch (NumberFormatException ex) {
-                    print("Please enter the expiration data in the format 'MMYY'");
+                    print("Please enter the expiration data, in the format 'MMYY'");
                     printPrompt();
                 }
             }
-            else {
+            else if (input.trim().length() > 0) {
                 print("Please enter the expiration data in the format 'MMYY'");
                 printPrompt();
             }
         }
     }
 
-    public static String getCardSecurity() {
-        Scanner in = new Scanner(System.in);
+    public static String getCardSecurity(Scanner in) {
+        // Scanner in = new Scanner(System.in);
+        // if (in.hasNextLine()) {
+        //     in.nextLine();
+        // }
         String input = "";
         while (true) {
             input = in.nextLine();
             if (input.trim().length() == 3) {
                 try {
                     Integer.parseInt(input);
-                    in.close();
+                    // in.close();
                     return input.trim();
                 } catch (NumberFormatException ex) {
                     print("Please enter a valid security code");
@@ -107,15 +133,18 @@ public class IOHandler {
         }
     }
 
-    public static String getCardPin() {
-        Scanner in = new Scanner(System.in);
+    public static String getCardPin(Scanner in) {
+        // Scanner in = new Scanner(System.in);
+        // if (in.hasNextLine()) {
+        //     in.nextLine();
+        // }
         String input = "";
         while (true) {
             input = in.nextLine();
             if (input.trim().length() > 0 && input.trim().length() <= 10) {
                 try {
                     Integer.parseInt(input);
-                    in.close();
+                    // in.close();
                     return input.trim();
                 } catch (NumberFormatException ex) {
                     print("Please enter a valid pin");

@@ -15,16 +15,23 @@ public class DepositWithdraw {
         this.db = db;
     }
 
-    public static void menu (Connection db) {
-        System.out.println("\nWould you like to use an ATM or a teller, please enter a number:");
-        System.out.println("\t1: ATM");
-        System.out.println("\t2: Teller");
-        System.out.print("> ");
+    public static void menu (Scanner in, Connection db) {
+        IOHandler.print("\nWould you like to use an ATM or a teller, please enter a number:");
+        IOHandler.print("\t1: ATM");
+        IOHandler.print("\t2: Teller");
+        IOHandler.print("\tb: Back");
+        IOHandler.print("\tq: Quit");
+        IOHandler.printPrompt();
 
-        Scanner in = new Scanner(System.in);
-        int menuSelection = IOHandler.getMenuSelection(in, NUM_MENUS);
+        // Scanner in = new Scanner(System.in);
+        int menuSelection = IOHandler.getMenuSelection(in, true, NUM_MENUS);
         
-        if (menuSelection == 1) ATMTransaction.menu(db);
+        if (menuSelection == 1) ATMTransaction.menu(in, db);
         else if (menuSelection == 2) TellerTransaction.menu();
+        else if (menuSelection == 9) return;
+        else if (menuSelection == 0) {
+            IOHandler.print("Thank you for using the deposit/withdraw interface.");
+            System.exit(0);
+        }
     }
 }

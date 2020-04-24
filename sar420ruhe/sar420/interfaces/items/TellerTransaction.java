@@ -19,7 +19,7 @@ public class TellerTransaction {
         System.out.println("\t2: Withdraw");
         System.out.print("> ");
 
-        int menuSelection = IOHandler.getMenuSelection(in, NUM_MENUS);
+        int menuSelection = IOHandler.getMenuSelection(in, true, NUM_MENUS);
 
         if (menuSelection == 1) System.out.println("Deposit");
         else if (menuSelection == 2) System.out.println("Withdraw");
