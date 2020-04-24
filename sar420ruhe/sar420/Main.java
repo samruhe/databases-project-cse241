@@ -19,6 +19,7 @@ class Main {
                     // PreparedStatement checkDepartment = conn.prepareStatement("");
             ) {
                 loggedIn = true;
+                Connection db = conn;
 
                 System.out.println("\nPlease select an interface option by typing the number: ");
                 System.out.println("\t1: Deposit/Withdraw");
@@ -26,8 +27,8 @@ class Main {
                 System.out.print("> ");
 
                 int interfaceSelection = IOHandler.getMenuSelection(in, NUM_INTERFACES);
-                if (interfaceSelection == 1) depositWithdrawInterface();
-                else if (interfaceSelection == 2) pruchaseInterface();
+                if (interfaceSelection == 1) DepositWithdraw.menu(db);
+                else if (interfaceSelection == 2) System.out.println("pruchaseInterface()");
 
             } catch (SQLException sqle) {
                 if (sqle.toString().contains("invalid username/password"))
@@ -39,13 +40,4 @@ class Main {
 
         in.close();
     }
-
-    private static void depositWithdrawInterface() {
-        DepositWithdraw.menu();
-    }
-
-    private static void pruchaseInterface() {
-
-    }
-
 }

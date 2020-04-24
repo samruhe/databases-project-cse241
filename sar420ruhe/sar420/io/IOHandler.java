@@ -135,4 +135,9 @@ public class IOHandler {
     public static void printPrompt() {
         System.out.print("> ");
     }
+
+    public static void printBalance(String account_number, String balance) {
+        System.out.println("Current posted balance for account ending in ******" + account_number.substring(6) + ":");
+        System.out.printf("\t$%.2f\n", Double.parseDouble(balance));
+    }
 }

@@ -1,6 +1,7 @@
 package interfaces.items;
 
 import java.util.Scanner;
+import java.sql.Connection;
 
 import io.IOHandler;
 import interfaces.items.CheckBalance;
@@ -13,7 +14,7 @@ public class ATMTransaction {
         super();
     }
 
-    public static void menu() {
+    public static void menu(Connection db) {
         Scanner in = new Scanner(System.in);
         IOHandler.print("\nWould you like to make a deposit or withdraw?");
         IOHandler.print("\t1: Check Balance");
@@ -22,7 +23,7 @@ public class ATMTransaction {
 
         int menuSelection = IOHandler.getMenuSelection(in, NUM_MENUS);
 
-        if (menuSelection == 1) CheckBalance.checkBalance(in);
+        if (menuSelection == 1) CheckBalance.checkBalance(in, db);
         else if (menuSelection == 2) System.out.println("Withdraw");
     }
 }
