@@ -11,45 +11,10 @@ public class Withdraw {
         super();
     }
 
-    public static void withdraw(Scanner in, Connection db, boolean isAtm) {
-        String success = "false";
+    public static void withdraw(Scanner in, String cardNumber, String cardExp, String cardSecurity, String cardPin, Connection db, boolean isAtm) {
         ArrayList<String> ret;
 
-        do {
-            IOHandler.print("\nMake a withdraw:");
-            IOHandler.print("---------------------------------------------");
-            IOHandler.print("Please enter your card number, without spaces");
-            IOHandler.printPrompt();
-            String cardNumber = IOHandler.getCardNumber(in);
-
-            IOHandler.print("Please enter your expiration date in the form, 'MMYY'");
-            IOHandler.printPrompt();
-            String cardExp = IOHandler.getCardExpiration(in);
-
-            IOHandler.print("Please enter your security code");
-            IOHandler.printPrompt();
-            String cardSecurity = IOHandler.getCardSecurity(in);
-
-            IOHandler.print("Please enter your pin");
-            IOHandler.printPrompt();
-            String cardPin = IOHandler.getCardPin(in);
-
-            ret = findAccount(cardNumber, cardExp, cardSecurity, cardPin, db);
-            success = ret.get(0);
-            if (success.equals("false")) {
-                IOHandler.print("\nWould you like to:");
-                IOHandler.print("\t1: Continue");
-                IOHandler.print("\tb: Back");
-                IOHandler.print("\tq: Quit");
-                int menuSelection = IOHandler.getMenuSelection(in, true, 1);
-
-                if (menuSelection == 9) return;
-                else if (menuSelection == 0) {
-                    IOHandler.print("\nThank you for using the ATM.");
-                    System.exit(0);
-                }
-            }
-        } while (success.equals("false"));
+        ret = findAccount(cardNumber, cardExp, cardSecurity, cardPin, db);
 
         double withdraw_amount = 0.0;
         IOHandler.print("\nAccount verified");
@@ -63,6 +28,7 @@ public class Withdraw {
                 if (success_withdraw) {
                     IOHandler.print("\nThank you for your transaction.");
                     IOHandler.print("Don't forget to grab your card.");
+                    IOHandler.print("--------------------------------------------------");
                     return;
                 }
             } while (true);
