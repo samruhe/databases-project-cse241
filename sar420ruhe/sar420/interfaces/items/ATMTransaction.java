@@ -27,7 +27,10 @@ public class ATMTransaction {
             int menuSelection = IOHandler.getMenuSelection(in, true, NUM_MENUS);
 
             if (menuSelection == 1) CheckBalance.checkBalance(in, db);
-            else if (menuSelection == 2) Withdraw.withdraw(in, db);
+            else if (menuSelection == 2) {
+                Withdraw.withdraw(in, db, true);
+                return;
+            }
             else if (menuSelection == 9) return;
             else if (menuSelection == 0) {
                 IOHandler.print("\nThank you for using the ATM.");

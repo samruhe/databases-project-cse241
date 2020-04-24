@@ -1,5 +1,6 @@
 package io;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.Console;
 
@@ -75,8 +76,7 @@ public class IOHandler {
             if (String.valueOf(input).length() == 16) {
                 // in.close();
                 return String.valueOf(input);
-            }
-            else {
+            } else {
                 print("Please enter a valid card number, with no spaces");
                 printPrompt();
             }
@@ -100,8 +100,7 @@ public class IOHandler {
                     print("Please enter the expiration data, in the format 'MMYY'");
                     printPrompt();
                 }
-            }
-            else if (input.trim().length() > 0) {
+            } else if (input.trim().length() > 0) {
                 print("Please enter the expiration data in the format 'MMYY'");
                 printPrompt();
             }
@@ -125,8 +124,7 @@ public class IOHandler {
                     print("Please enter a valid security code");
                     printPrompt();
                 }
-            }
-            else {
+            } else {
                 print("Please enter a valid secuirty code");
                 printPrompt();
             }
@@ -150,11 +148,32 @@ public class IOHandler {
                     print("Please enter a valid pin");
                     printPrompt();
                 }
-            }
-            else {
+            } else {
                 print("Please enter a valid pin");
                 printPrompt();
             }
+        }
+    }
+
+    public static double getWithdrawAmount(Scanner in, boolean isAtm) {
+        Double input = 0.0;
+        while (true) {
+            try {
+                input = in.nextDouble();
+            } catch (InputMismatchException ex) {
+                print("Please enter a valid number");
+                printPrompt();
+                continue;
+            }
+
+            if (isAtm) {
+                if (input % 20 == 0) {
+                    return input;
+                } else {
+                    print("Please enter a whole number that is a multiple of 20");
+                    printPrompt();
+                }
+            } else return input;
         }
     }
 
