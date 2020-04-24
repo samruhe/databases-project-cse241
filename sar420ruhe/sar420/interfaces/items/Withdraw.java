@@ -24,7 +24,7 @@ public class Withdraw {
             System.out.print("(whole number divisible by 20): $");
             do {
                 withdraw_amount = IOHandler.getWithdrawAmount(in, isAtm);
-                boolean success_withdraw = attemptWithdraw(ret.get(1), ret.get(2), withdraw_amount, db);
+                boolean success_withdraw = attemptWithdraw(ret.get(0), ret.get(1), withdraw_amount, db);
                 if (success_withdraw) {
                     IOHandler.print("\nThank you for your transaction.");
                     IOHandler.print("Don't forget to grab your card.");
@@ -47,22 +47,18 @@ public class Withdraw {
             
             if (rs.next()) {
                 ArrayList<String> ret = new ArrayList<>();
-                ret.add("true");
                 ret.add(rs.getString(1));
                 ret.add(rs.getString(2));
-                ret.add(rs.getString(3));
                 return ret;
             } else {
                 IOHandler.print("\nThere is no account matching the entered card information.");
                 // IOHandler.print("Please try re-entering the card information");
                 ArrayList<String> ret = new ArrayList<>();
-                ret.add("false");
                 return ret;
             }
         } catch (SQLException ex) {
             IOHandler.print("There was an issue, please try again.");
             ArrayList<String> ret = new ArrayList<>();
-            ret.add("false");
             return ret;
         }
     }
