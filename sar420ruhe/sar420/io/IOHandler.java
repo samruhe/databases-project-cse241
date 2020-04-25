@@ -60,7 +60,7 @@ public class IOHandler {
 
     public static String getCardNumber(Scanner in) {
         long input = 0;
-        
+
         while (true) {
             if (!in.hasNextLong()) {
                 print("Please enter a valid card number, with no spaces");
@@ -220,6 +220,10 @@ public class IOHandler {
 
     public static void printPrompt() {
         System.out.print("> ");
+    }
+
+    public static void printBreak() {
+        System.out.println("------------------------------------------");
     }
 
     public static void printBalance(String account_number, String balance) {

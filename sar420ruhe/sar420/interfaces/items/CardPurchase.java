@@ -187,6 +187,5 @@ public class CardPurchase {
             System.exit(0);
         }
         return trans_id;
-        
     }
 }
