@@ -11,24 +11,21 @@ public class Withdraw {
         super();
     }
 
-    public static void withdraw(Scanner in, String cardNumber, String cardExp, String cardSecurity, String cardPin, Connection db, boolean isAtm) {
+    public static void withdraw(Scanner in, String branch_id, String cardNumber, String cardExp, String cardSecurity, String cardPin, Connection db, boolean isAtm) {
         ArrayList<String> ret;
 
         ret = findAccount(cardNumber, cardExp, cardSecurity, cardPin, db);
 
         double withdraw_amount = 0.0;
-        IOHandler.print("\nAccount verified");
         if (isAtm) {
-            IOHandler.print("--------------------------------------------------");
             IOHandler.print("Please enter the amount you would like to withdraw");
             System.out.print("(whole number divisible by 20): $");
             do {
                 withdraw_amount = IOHandler.getWithdrawAmount(in, isAtm);
-                boolean success_withdraw = attemptWithdraw(ret.get(0), ret.get(1), withdraw_amount, db);
+                boolean success_withdraw = attemptATMWithdraw(ret.get(0), ret.get(1), branch_id, ret.get(2), withdraw_amount, db);
                 if (success_withdraw) {
                     IOHandler.print("\nThank you for your transaction.");
                     IOHandler.print("Don't forget to grab your card.");
-                    IOHandler.print("--------------------------------------------------");
                     return;
                 }
             } while (true);
@@ -65,7 +62,7 @@ public class Withdraw {
     }
 
     private static ArrayList<String> findAccount(String num, String exp, String sec, String pin, Connection db) {
-        try (PreparedStatement s = db.prepareStatement("SELECT account_number, balance, FROM debit_card JOIN checking_acct USING (account_number) WHERE card_number=? AND expiration=? AND security_code=? AND pin=?");
+        try (PreparedStatement s = db.prepareStatement("SELECT account_number, balance, debit_card.customer_id FROM debit_card JOIN checking_acct USING (account_number) WHERE card_number=? AND expiration=? AND security_code=? AND pin=?");
         ) {
             s.setString(1, num);
             s.setString(2, exp);
@@ -77,10 +74,10 @@ public class Withdraw {
                 ArrayList<String> ret = new ArrayList<>();
                 ret.add(rs.getString(1));
                 ret.add(rs.getString(2));
+                ret.add(rs.getString(3));
                 return ret;
             } else {
                 IOHandler.print("\nThere is no account matching the entered card information.");
-                // IOHandler.print("Please try re-entering the card information");
                 ArrayList<String> ret = new ArrayList<>();
                 return ret;
             }
@@ -91,7 +88,7 @@ public class Withdraw {
         }
     }
 
-    private static boolean attemptWithdraw(String account_number, String current_balance, double withdraw_amount, Connection db) {
+    private static boolean attemptATMWithdraw(String account_number, String current_balance, String branch_id, String cust_id, double withdraw_amount, Connection db) {
         double balance = 0.0;
         try {
             balance = Double.parseDouble(current_balance);
@@ -106,8 +103,8 @@ public class Withdraw {
             IOHandler.print("Please enter a smaller amount");
             return false;
         } else {
-            try (/*PreparedStatement s = db.prepareStatement("UPDATE checking_acct SET balance=? WHERE account_number=?");*/
-                 PreparedStatement s = db.prepareStatement("UPDATE account SET balance=? WHERE account_number=?");
+            try (PreparedStatement s = db.prepareStatement("UPDATE account SET balance=? WHERE account_number=?");
+                 PreparedStatement transInsert = db.prepareStatement("INSERT INTO atm_withdraw (trans_id,amount,time,customer_id,branch_id,account_number) VALUES (?,?,sysdate,?,?,?)");
             ){
                 String new_balance = String.format("%.2f", balance - withdraw_amount);
                 s.setString(1, new_balance);
@@ -115,6 +112,15 @@ public class Withdraw {
                 s.executeUpdate();
                 IOHandler.print("");
                 IOHandler.printBalance(account_number, new_balance);
+
+                long trans_id = makeTransID(db);
+                transInsert.setLong(1, trans_id);
+                transInsert.setString(2, String.format("%.2f", withdraw_amount));
+                transInsert.setString(3, cust_id);
+                transInsert.setString(4, branch_id);
+                transInsert.setString(5, account_number);
+                transInsert.executeUpdate();
+                
                 return true;
             } catch (SQLException ex) {
                 IOHandler.print("There was an issue, please try again.");
@@ -183,5 +189,33 @@ public class Withdraw {
             IOHandler.print("There was an issue, please try again.");
             return false;
         }
+    }
+
+    private static long makeTransID(Connection db) {
+        long trans_id = 0;
+
+        try (PreparedStatement s = db.prepareStatement("(SELECT trans_id FROM purchase) UNION (SELECT trans_id FROM atm_withdraw) UNION (SELECT trans_id FROM teller_withdraw) UNION (SELECT trans_id FROM teller_deposit)");
+        ) {
+            boolean unique = false;
+            
+            do {
+                trans_id = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+                
+                ResultSet rs = s.executeQuery();
+                while (rs.next()) {
+                    if (rs.getLong(1) == trans_id) {
+                        unique = false;
+                        break;
+                    }
+                    unique = true;
+                }
+            } while (!unique);
+
+        } catch (SQLException ex) {
+            IOHandler.print("There was an issue, exiting");
+            System.exit(0);
+        }
+        return trans_id;
+        
     }
 }

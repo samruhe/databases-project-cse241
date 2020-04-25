@@ -2,6 +2,7 @@ package interfaces.items;
 
 import java.util.Scanner;
 import java.sql.*;
+import java.util.ArrayList;
 
 import io.IOHandler;
 
@@ -18,6 +19,20 @@ public class ATMTransaction {
         String cardExp = "";
         String cardSecurity = "";
         String cardPin = "";
+        String branch = "";
+
+        ArrayList<String> branches = displayBranches(in, db);
+        IOHandler.print("b: Back");
+        IOHandler.print("q: Quit");
+        IOHandler.print("\nPlease select a branch location by entering the number:");
+        IOHandler.printPrompt();
+        int menuSelect = IOHandler.getMenuSelection(in, true, branches.size());
+
+        if (menuSelect == -1) return;
+        else if (menuSelect == 0) {
+            IOHandler.print("\nThank you for using the teller service.");
+            System.exit(0);
+        } else branch = branches.get(menuSelect - 1);
 
         do {
             IOHandler.print("\nEnter card Information:");
@@ -41,6 +56,9 @@ public class ATMTransaction {
             success = findAccount(cardNumber, cardExp, cardSecurity, cardPin, db);
         } while (!success);
 
+        IOHandler.print("\nAccount Verified");
+        IOHandler.printBreak();
+
         do {
             IOHandler.print("\nWould you like to check your balance or make a withdraw?");
             IOHandler.print("\t1: Check Balance");
@@ -53,7 +71,7 @@ public class ATMTransaction {
 
             if (menuSelection == 1) CheckBalance.checkBalance(in, cardNumber, cardExp, cardSecurity, cardPin, db);
             else if (menuSelection == 2) {
-                Withdraw.withdraw(in, cardNumber, cardExp, cardSecurity, cardPin, db, true);
+                Withdraw.withdraw(in, branch, cardNumber, cardExp, cardSecurity, cardPin, db, true);
                 return;
             }
             else if (menuSelection == -1) return;
@@ -83,5 +101,40 @@ public class ATMTransaction {
             IOHandler.print("There was an issue, please try again.");
             return false;
         }
+    }
+
+    private static ArrayList<String> displayBranches(Scanner in, Connection db) {
+        ArrayList<String> branches = new ArrayList<>();
+
+        try (PreparedStatement s = db.prepareStatement("(SELECT branch_id, line1, city, state, zip FROM atm JOIN address USING (address_id))");
+        ) {
+            ResultSet rs = s.executeQuery();
+
+            IOHandler.print("\nPlease select a branch:");
+            System.out.printf("   %-20s%-20s%-20s%-20s\n", "Street", "City", "State", "Zip Code");
+            System.out.printf("   %-20s%-20s%-20s%-20s\n", "-------------------", "-------------------", "-------------------", "---------");
+            
+            int numBranch = 1;
+            while (rs.next()) {    
+                System.out.print(numBranch++ + ": ");
+                for (int i = 1; i <= 5; i++) {
+                    String formatVal = "";
+                    if (i == 1) {
+                        branches.add(rs.getString(i));
+                    }
+                    else {
+                        String value = rs.getString(i).length() > 18 ? rs.getString(i).substring(0, 18) : rs.getString(i);
+                        formatVal = String.format("%-20s", value);
+                    }
+                    System.out.print(formatVal);
+                }
+                System.out.println();
+            }
+        } catch (SQLException ex) {
+            IOHandler.print("\nThere was an issue, exiting.");
+            System.exit(0);
+        }
+
+        return branches;
     }
 }
