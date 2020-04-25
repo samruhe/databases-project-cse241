@@ -3,6 +3,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 import interfaces.DepositWithdraw;
+import interfaces.Purchases;
 import io.IOHandler;
 
 class Main {
@@ -14,9 +15,6 @@ class Main {
         do {
             String[] creds = IOHandler.getCreds(in);
             try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@edgar1.cse.lehigh.edu:1521:cse241", creds[0], creds[1]);
-                    // PreparedStatement selectInstructor = conn.prepareStatement("");
-                    // PreparedStatement selectDepartments = conn.prepareStatement("");
-                    // PreparedStatement checkDepartment = conn.prepareStatement("");
             ) {
                 loggedIn = true;
                 Connection db = conn;
@@ -29,7 +27,7 @@ class Main {
 
                     int interfaceSelection = IOHandler.getMenuSelection(in, false, NUM_INTERFACES);
                     if (interfaceSelection == 1) DepositWithdraw.menu(in, db);
-                    else if (interfaceSelection == 2) System.out.println("purchaseInterface()");
+                    else if (interfaceSelection == 2) Purchases.menu(in, db);
                     else if (interfaceSelection == 0) {
                         IOHandler.print("\nThank you.");
                         System.exit(0);
