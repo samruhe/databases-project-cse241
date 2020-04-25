@@ -13,15 +13,29 @@ public class TellerTransaction {
     }
 
     public static void menu(Scanner in, Connection db) {
+        String branch = "";
+
+        ArrayList<String> branches = displayBranches(in, db);
+        IOHandler.print("b: Back");
+        IOHandler.print("q: Quit");
+        IOHandler.print("\nPlease select a branch location by entering the number:");
+        IOHandler.printPrompt();
+        int menuSelect = IOHandler.getMenuSelection(in, true, branches.size());
+
+        if (menuSelect == -1) return;
+        else if (menuSelect == 0) {
+            IOHandler.print("\nThank you for using the teller service.");
+            System.exit(0);
+        } else branch = branches.get(menuSelect - 1);
+
         IOHandler.print("\nPlease enter your ID number:");
         IOHandler.printPrompt();
-
         String custID = IOHandler.getCustomerID(in);
 
         ArrayList<String> acct_nums = findAccounts(custID, db);
         if (acct_nums.size() > 0) {
             IOHandler.print("b: Back");
-            IOHandler.print("q: Quit\n");
+            IOHandler.print("q: Quit");
             IOHandler.print("\nPlease select an account by entering the number:");
             IOHandler.printPrompt();
             int menuSelection = IOHandler.getMenuSelection(in, true, acct_nums.size());
@@ -30,7 +44,7 @@ public class TellerTransaction {
                 IOHandler.print("\nThank you for using the teller service.");
                 System.exit(0);
             } else {
-                nextMenu(in, acct_nums.get(menuSelection - 1), db);
+                nextMenu(in, branch, acct_nums.get(menuSelection - 1), db);
             }
         } else return;
     }
@@ -86,7 +100,7 @@ public class TellerTransaction {
         }
     }
 
-    private static void nextMenu(Scanner in, String account_number, Connection db) {
+    private static void nextMenu(Scanner in, String branch_id, String account_number, Connection db) {
         do {
             IOHandler.print("\nWould you like to make a deposit or withdraw?");
             IOHandler.print("\t1: Deposit");
@@ -98,11 +112,11 @@ public class TellerTransaction {
             int menuSelection = IOHandler.getMenuSelection(in, true, NUM_MENUS);
 
             if (menuSelection == 1) {
-                Deposit.makeDeposit(in, account_number, db);
+                Deposit.makeDeposit(in, branch_id, account_number, db);
                 return;
             }
             else if (menuSelection == 2) {
-                Withdraw.tellerWithdraw(in, account_number, db);
+                Withdraw.tellerWithdraw(in, branch_id, account_number, db);
                 return;
             }
             else if (menuSelection == -1) return;
@@ -111,5 +125,40 @@ public class TellerTransaction {
                 System.exit(0);
             }
         } while(true);
+    }
+
+    private static ArrayList<String> displayBranches(Scanner in, Connection db) {
+        ArrayList<String> branches = new ArrayList<>();
+
+        try (PreparedStatement s = db.prepareStatement("(SELECT branch_id, line1, city, state, zip FROM teller JOIN address USING (address_id))");
+        ) {
+            ResultSet rs = s.executeQuery();
+
+            IOHandler.print("\nPlease select a branch:");
+            System.out.printf("   %-20s%-20s%-20s%-20s\n", "Street", "City", "State", "Zip Code");
+            System.out.printf("   %-20s%-20s%-20s%-20s\n", "-------------------", "-------------------", "-------------------", "---------");
+            
+            int numBranch = 1;
+            while (rs.next()) {    
+                System.out.print(numBranch++ + ": ");
+                for (int i = 1; i <= 5; i++) {
+                    String formatVal = "";
+                    if (i == 1) {
+                        branches.add(rs.getString(i));
+                    }
+                    else {
+                        String value = rs.getString(i).length() > 18 ? rs.getString(i).substring(0, 18) : rs.getString(i);
+                        formatVal = String.format("%-20s", value);
+                    }
+                    System.out.print(formatVal);
+                }
+                System.out.println();
+            }
+        } catch (SQLException ex) {
+            IOHandler.print("\nThere was an issue, exiting.");
+            System.exit(0);
+        }
+
+        return branches;
     }
 }
