@@ -5,8 +5,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import io.IOHandler;
-import interfaces.items.Deposit;
-import interfaces.items.Withdraw;
 
 public class TellerTransaction {
     private final static int NUM_MENUS = 2;

@@ -24,7 +24,6 @@ public class DepositWithdraw {
             IOHandler.print("\tq: Quit");
             IOHandler.printPrompt();
 
-            // Scanner in = new Scanner(System.in);
             int menuSelection = IOHandler.getMenuSelection(in, true, NUM_MENUS);
             
             if (menuSelection == 1) ATMTransaction.menu(in, db);

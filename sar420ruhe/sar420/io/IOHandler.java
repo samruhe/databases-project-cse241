@@ -59,11 +59,8 @@ public class IOHandler {
     }
 
     public static String getCardNumber(Scanner in) {
-        // Scanner in = new Scanner(System.in);
-        // if (in.hasNextLine()) {
-        //     in.nextLine();
-        // }
         long input = 0;
+        
         while (true) {
             if (!in.hasNextLong()) {
                 print("Please enter a valid card number, with no spaces");
@@ -84,11 +81,8 @@ public class IOHandler {
     }
 
     public static String getCardExpiration(Scanner in) {
-        // Scanner in = new Scanner(System.in);
-        // if (in.hasNextLine()) {
-        //     in.nextLine();
-        // }
         String input = "";
+
         while (true) {
             input = in.nextLine();
             if (input.trim().length() == 4) {
@@ -108,11 +102,8 @@ public class IOHandler {
     }
 
     public static String getCardSecurity(Scanner in) {
-        // Scanner in = new Scanner(System.in);
-        // if (in.hasNextLine()) {
-        //     in.nextLine();
-        // }
         String input = "";
+
         while (true) {
             input = in.nextLine();
             if (input.trim().length() == 3) {
@@ -132,11 +123,8 @@ public class IOHandler {
     }
 
     public static String getCardPin(Scanner in) {
-        // Scanner in = new Scanner(System.in);
-        // if (in.hasNextLine()) {
-        //     in.nextLine();
-        // }
         String input = "";
+
         while (true) {
             input = in.nextLine();
             if (input.trim().length() > 0 && input.trim().length() <= 10) {

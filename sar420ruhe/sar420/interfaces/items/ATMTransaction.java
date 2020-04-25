@@ -4,8 +4,6 @@ import java.util.Scanner;
 import java.sql.*;
 
 import io.IOHandler;
-import interfaces.items.CheckBalance;
-import interfaces.items.Withdraw;
 
 public class ATMTransaction {
     private final static int NUM_MENUS = 2;
@@ -79,7 +77,6 @@ public class ATMTransaction {
                 return true;
             } else {
                 IOHandler.print("\nThere is no account matching the entered card information.");
-                // IOHandler.print("Please try re-entering the card information");
                 return false;
             }
         } catch (SQLException ex) {
