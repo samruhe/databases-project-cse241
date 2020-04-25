@@ -104,7 +104,7 @@ public class TellerTransaction {
                 return;
             }
             else if (menuSelection == 2) {
-                // Withdraw.withdraw(in, cardNumber, cardExp, cardSecurity, cardPin, db, true);
+                Withdraw.tellerWithdraw(in, account_number, db);
                 return;
             }
             else if (menuSelection == -1) return;
