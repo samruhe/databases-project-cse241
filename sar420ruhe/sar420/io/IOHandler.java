@@ -210,6 +210,22 @@ public class IOHandler {
         }
     }
 
+    public static String getVendorName(Scanner in) {
+        String input = "";
+
+        while (true) {
+            input = in.nextLine();
+            if (input.trim().length() > 0 && input.trim().length() <= 20) {
+                return input.trim();
+            } else if (input.trim().length() > 20) {
+                return input.trim().substring(0, 19);
+            } else {
+                print("Please enter a valid store name");
+                printPrompt();
+            }
+        }
+    }
+
     public static void print(String line) {
         System.out.println(line);
     }
