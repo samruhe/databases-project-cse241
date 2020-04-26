@@ -46,8 +46,9 @@ public class CreateAccount {
     public static void openChecking(String acct_num, double initial_amount, String cust_id, String add_id, ArrayList<String> address, String name, boolean newCustomer, Connection db) {
         try (PreparedStatement insertCustomer = db.prepareStatement("INSERT INTO customer (customer_id,name,address_id) VALUES (?,?,?)");
              PreparedStatement insertAddress = db.prepareStatement("INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (?,?,?,?,?,?)");
-            PreparedStatement insertAccount = db.prepareStatement("INSERT INTO checking_acct (account_number,balance,minimum_balance,customer_id) VALUES (?,?,?,?)");
+             PreparedStatement insertAccount = db.prepareStatement("INSERT INTO checking_acct (account_number,balance,minimum_balance,customer_id) VALUES (?,?,?,?)");
         ) {
+            db.setAutoCommit(false);
             if (newCustomer) {
                 insertAddress.setString(1, add_id); 
                 insertAddress.setString(2, address.get(0));
@@ -69,9 +70,27 @@ public class CreateAccount {
             insertAccount.setString(4, cust_id);
             insertAccount.executeUpdate();
 
+            db.commit();
+
+            IOHandler.print("\nThank you. Your account has been created.");
+            IOHandler.printNewAccount(acct_num, initial_amount, 0, 0, false);
+
         } catch (SQLException ex) {
             IOHandler.print("\nThere was an issue. Please try again.");
+            try {
+                db.rollback();
+            } catch (SQLException e) {
+                IOHandler.print("Exiting.");
+                System.exit(0);
+            }
             return;
+        } finally {
+            try {
+                db.setAutoCommit(true);
+            } catch (SQLException ex) {
+                IOHandler.print("\nThere is a problem with the database. Please try again later.");
+                System.exit(0);
+            }
         }
     }
 

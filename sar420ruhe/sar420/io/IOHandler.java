@@ -330,4 +330,13 @@ public class IOHandler {
         System.out.println("Current posted balance for account ending in ******" + account_number.substring(6) + ":");
         System.out.printf("\t$%.2f\n", Double.parseDouble(balance));
     }
+
+    public static void printNewAccount(String account_number, double balance, double minimum_balance, double penalty, boolean isSavings) {
+        System.out.println("New account ending in ******" + account_number.substring(6) + ":");
+        System.out.printf("\tBalance:         $%.2f\n", balance);
+        if (isSavings) {
+            System.out.printf("\tMinimum Balance: $%.2f\n", minimum_balance);
+            System.out.printf("\tPenalty:         $%.2f\n", penalty);
+        }
+    }
 }
