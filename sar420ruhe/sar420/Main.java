@@ -3,11 +3,12 @@ import java.sql.*;
 import java.util.Scanner;
 
 import interfaces.DepositWithdraw;
+import interfaces.OpenAccount;
 import interfaces.Purchases;
 import io.IOHandler;
 
 class Main {
-    private final static int NUM_INTERFACES = 2;
+    private final static int NUM_INTERFACES = 3;
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
@@ -21,13 +22,15 @@ class Main {
                 do {
                     IOHandler.print("\nPlease select an interface option by typing the number: ");
                     IOHandler.print("\t1: Deposit/Withdraw");
-                    IOHandler.print("\t2: Purchases");
+                    IOHandler.print("\t2: Open New Account");
+                    IOHandler.print("\t3: Purchases");
                     IOHandler.print("\tq: Quit");
                     IOHandler.printPrompt();
 
                     int interfaceSelection = IOHandler.getMenuSelection(in, false, NUM_INTERFACES);
                     if (interfaceSelection == 1) DepositWithdraw.menu(in, db);
-                    else if (interfaceSelection == 2) Purchases.menu(in, db);
+                    else if (interfaceSelection == 2) OpenAccount.menu(in, db);
+                    else if (interfaceSelection == 3) Purchases.menu(in, db);
                     else if (interfaceSelection == 0) {
                         IOHandler.print("\nThank you.");
                         System.exit(0);

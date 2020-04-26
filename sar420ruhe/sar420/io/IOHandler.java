@@ -179,10 +179,19 @@ public class IOHandler {
         }
     }
 
-    public static String getCustomerID(Scanner in) {
+    public static String getCustomerID(Scanner in, boolean allowNew) {
         String input = "";
         while (true) {
             input = in.nextLine();
+            if (allowNew) {
+                if (input.trim().length() == 1) {
+                    if (input.trim().equals("0")) return input.trim();
+                    else {
+                        print("Please enter a valid ID");
+                    }
+                }
+            }
+
             if (input.trim().length() == 10) {
                 try {
                     Long.parseLong(input);

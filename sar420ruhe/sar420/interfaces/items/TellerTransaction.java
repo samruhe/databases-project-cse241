@@ -30,7 +30,7 @@ public class TellerTransaction {
 
         IOHandler.print("\nPlease enter your ID number:");
         IOHandler.printPrompt();
-        String custID = IOHandler.getCustomerID(in);
+        String custID = IOHandler.getCustomerID(in, false);
 
         ArrayList<String> acct_nums = findAccounts(custID, db);
         if (acct_nums.size() > 0) {
