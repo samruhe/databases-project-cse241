@@ -127,3 +127,6 @@ PL/SQL:
             After a new savings account is added to the table savings_acct, adds the 
             correct information to a new account in the table account
 
+ER Diagram:
+    I have made some minor modifications to the ER Diagram that I submitted. I added 
+    two attributes to credit_card and modified branch and transactions.
