@@ -3,6 +3,7 @@ package io;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.Console;
+import java.util.ArrayList;
 
 public class IOHandler {
     public IOHandler() {
@@ -202,6 +203,96 @@ public class IOHandler {
                 }
             } else {
                 print("Please enter a valid ID");
+                printPrompt();
+            }
+        }
+    }
+
+    public static ArrayList<String> getNewCustomer(Scanner in) {
+        ArrayList<String> address = new ArrayList<>();
+        String line1 = "";
+        String line2 = "";
+        String city = "";
+        String state = "";
+        String zip = "";
+
+        print("Please enter your street address (line 1):");
+        printPrompt();
+        while (true) {
+            line1 = in.nextLine();
+            if (line1.trim().length() > 0) {
+                line1 = line1.trim().length() <= 30 ? line1 : line1.trim().substring(0, 29);
+                address.add(line1);
+                break;
+            } else {
+                print("Please enter a valid street address");
+                printPrompt();
+            }
+        }
+
+        print("Please enter your street address (line 2):");
+        print("(Press enter to leave blank)");
+        printPrompt();
+        while (true) {
+            line2 = in.nextLine();
+            line2 = line2.trim().length() <= 30 ? line2 : line2.trim().substring(0, 29);
+            address.add(line2);
+            break;
+        }
+
+        print("Please enter your city:");
+        printPrompt();
+        while (true) {
+            city = in.nextLine();
+            if (city.trim().length() > 0) {
+                city = city.trim().length() <= 20 ? city : city.trim().substring(0, 19);
+                address.add(city);
+                break;
+            } else {
+                print("Please enter a valid city");
+                printPrompt();
+            }
+        }
+
+        print("Please enter your state:");
+        printPrompt();
+        while (true) {
+            state = in.nextLine();
+            if (state.trim().length() > 0) {
+                state = state.trim().length() <= 15 ? state : state.trim().substring(0, 14);
+                address.add(state);
+                break;
+            } else {
+                print("Please enter a valid state");
+                printPrompt();
+            }
+        }
+
+        print("Please enter your zip code:");
+        printPrompt();
+        while (true) {
+            zip = in.nextLine();
+            if (zip.trim().length() == 5) {
+                address.add(zip);
+                break;
+            } else {
+                print("Please enter a valid zip code");
+                printPrompt();
+            }
+        }
+
+        return address;
+    }
+
+    public static String getCustomerName(Scanner in) {
+        String name = "";
+        
+        while (true) {
+            name = in.nextLine();
+            if (name.trim().length() > 0) {
+                return name.trim().length() <= 20 ? name : name.trim().substring(0, 19);
+            } else {
+                print("Please enter your full name:");
                 printPrompt();
             }
         }

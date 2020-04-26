@@ -39,9 +39,9 @@ class Main {
 
             } catch (SQLException sqle) {
                 if (sqle.toString().contains("invalid username/password"))
-                    IOHandler.print("Connect error. Re-enter login data:");
+                    IOHandler.print("Login error. Re-enter login data:");
                 else
-                    IOHandler.print("SQLException: " + sqle);
+                    IOHandler.print("Connect error. Re-enter login data");
             }
         } while (!loggedIn);
 
