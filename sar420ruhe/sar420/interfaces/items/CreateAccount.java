@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import io.IOHandler;
 
 public class CreateAccount {
+    private final static double CHECKING_MIN_BAL = 0.00;
+    private final static double SAVINGS_MIN_BAL = 200.00;
+    private final static double SAVINGS_PENALTY = 50.00;
+
     public CreateAccount() {
         super();
     }
@@ -39,7 +43,7 @@ public class CreateAccount {
         if (type.equals("checking")) {
             openChecking(account_number, initial_amount, cust_id, add_id, address, name, newCustomer, db);
         } else if (type.equals("savings")) {
-            openSavings(account_number, initial_amount, cust_id, address, db);
+            openSavings(account_number, initial_amount, cust_id, add_id, address, name, newCustomer, db);
         }
     }
 
@@ -66,14 +70,14 @@ public class CreateAccount {
 
             insertAccount.setString(1, acct_num);
             insertAccount.setString(2, String.format("%.2f", initial_amount));
-            insertAccount.setString(3, "0");
+            insertAccount.setString(3, String.format("%.2f", CHECKING_MIN_BAL));
             insertAccount.setString(4, cust_id);
             insertAccount.executeUpdate();
 
             db.commit();
 
             IOHandler.print("\nThank you. Your account has been created.");
-            IOHandler.printNewAccount(acct_num, initial_amount, 0, 0, false);
+            IOHandler.printNewAccount(acct_num, initial_amount, CHECKING_MIN_BAL, 0, false);
 
         } catch (SQLException ex) {
             IOHandler.print("\nThere was an issue. Please try again.");
@@ -94,8 +98,56 @@ public class CreateAccount {
         }
     }
 
-    public static void openSavings(String acct_num, double initial_amount, String cust_id, ArrayList<String> address, Connection db) {
+    public static void openSavings(String acct_num, double initial_amount, String cust_id, String add_id, ArrayList<String> address, String name, boolean newCustomer, Connection db) {
+        try (PreparedStatement insertCustomer = db.prepareStatement("INSERT INTO customer (customer_id,name,address_id) VALUES (?,?,?)");
+             PreparedStatement insertAddress = db.prepareStatement("INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (?,?,?,?,?,?)");
+             PreparedStatement insertAccount = db.prepareStatement("INSERT INTO savings_acct (account_number,balance,minimum_balance,customer_id,penalty) VALUES (?,?,?,?,?)");
+        ) {
+            db.setAutoCommit(false);
+            if (newCustomer) {
+                insertAddress.setString(1, add_id); 
+                insertAddress.setString(2, address.get(0));
+                insertAddress.setString(3, address.get(1));
+                insertAddress.setString(4, address.get(2));
+                insertAddress.setString(5, address.get(3));
+                insertAddress.setString(6, address.get(4));
+                insertAddress.executeUpdate();
 
+                insertCustomer.setString(1, cust_id);
+                insertCustomer.setString(2, name);
+                insertCustomer.setString(3, add_id);
+                insertCustomer.executeUpdate();
+            }
+
+            insertAccount.setString(1, acct_num);
+            insertAccount.setString(2, String.format("%.2f", initial_amount));
+            insertAccount.setString(3, String.format("%.2f", SAVINGS_MIN_BAL));
+            insertAccount.setString(4, cust_id);
+            insertAccount.setString(5, String.format("%.2f", SAVINGS_PENALTY));
+            insertAccount.executeUpdate();
+
+            db.commit();
+
+            IOHandler.print("\nThank you. Your account has been created.");
+            IOHandler.printNewAccount(acct_num, initial_amount, SAVINGS_MIN_BAL, SAVINGS_PENALTY, true);
+
+        } catch (SQLException ex) {
+            IOHandler.print("\nThere was an issue. Please try again.");
+            try {
+                db.rollback();
+            } catch (SQLException e) {
+                IOHandler.print("Exiting.");
+                System.exit(0);
+            }
+            return;
+        } finally {
+            try {
+                db.setAutoCommit(true);
+            } catch (SQLException ex) {
+                IOHandler.print("\nThere is a problem with the database. Please try again later.");
+                System.exit(0);
+            }
+        }
     }
 
     private static long makeCustID(Connection db) {
