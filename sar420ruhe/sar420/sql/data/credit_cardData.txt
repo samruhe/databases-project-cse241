@@ -1,0 +1,6 @@
+INSERT INTO credit_card (card_number,expiration,security_code,credit_limit,outstanding_balance,name_on_card,customer_id,branch_id) VALUES (7546974991758665,1231,216,1900,200,'Amanda Vargas',5744848247,9409396462);
+INSERT INTO credit_card (card_number,expiration,security_code,credit_limit,outstanding_balance,name_on_card,customer_id,branch_id) VALUES (7855968102812768,0801,118,400,150.23,'Veda Pruitt',6358977970,2709552372);
+INSERT INTO credit_card (card_number,expiration,security_code,credit_limit,outstanding_balance,name_on_card,customer_id,branch_id) VALUES (5103668520847956,0604,108,200,50.34,'Calista Henry',3959905008,9409396462);
+INSERT INTO credit_card (card_number,expiration,security_code,credit_limit,outstanding_balance,name_on_card,customer_id,branch_id) VALUES (8933553778462941,1024,597,5000,2394.71,'Quinn Gray',3645623338,2709552372);
+INSERT INTO credit_card (card_number,expiration,security_code,credit_limit,outstanding_balance,name_on_card,customer_id,branch_id) VALUES (8744982489281231,0206,232,1000,0,'Maxine Alford',1539597920,2709552372);
+INSERT INTO credit_card (card_number,expiration,security_code,credit_limit,outstanding_balance,name_on_card,customer_id,branch_id) VALUES (9299697122640081,0108,234,15000,7304.40,'Iola Talley',9467398176,9849128752);

@@ -1,0 +1,6 @@
+INSERT INTO checking_acct (account_number,balance,minimum_balance,customer_id) VALUES (5336394442,3613.92,0,3645623338);
+INSERT INTO checking_acct (account_number,balance,minimum_balance,customer_id) VALUES (5219205067,8871.26,0,4508153796);
+INSERT INTO checking_acct (account_number,balance,minimum_balance,customer_id) VALUES (2911114419,72.20,0,5744848247);
+INSERT INTO checking_acct (account_number,balance,minimum_balance,customer_id) VALUES (4046928439,730.27,0,6358977970);
+INSERT INTO checking_acct (account_number,balance,minimum_balance,customer_id) VALUES (8822618114,565.74,0,6367450911);
+INSERT INTO checking_acct (account_number,balance,minimum_balance,customer_id) VALUES (3847562918,4593.34,0,4069060960);

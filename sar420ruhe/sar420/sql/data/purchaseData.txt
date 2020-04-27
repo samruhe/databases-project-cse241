@@ -1,0 +1,10 @@
+INSERT INTO purchase (trans_id,amount,time,customer_id,account_number,vendor) VALUES (2628849624,'207.97',TO_TIMESTAMP('2020-4-6 07:44:58.80', 'YYYY-MM-DD HH24:MI:SS.FF'),3959905008,9521663354,'Apple Inc.');
+INSERT INTO purchase (trans_id,amount,time,customer_id,account_number,vendor) VALUES (9622549836,'218.64',TO_TIMESTAMP('2020-4-17 18:06:15.59', 'YYYY-MM-DD HH24:MI:SS.FF'),1436978296,3851037563,'Costco');
+INSERT INTO purchase (trans_id,amount,time,customer_id,account_number,vendor) VALUES (3936968656,'5.42',TO_TIMESTAMP('2020-3-17 07:43:16.85', 'YYYY-MM-DD HH24:MI:SS.FF'),6358977970,4046928439,'Starbucks');
+INSERT INTO purchase (trans_id,amount,time,customer_id,account_number,vendor) VALUES (7475399370,'345.90',TO_TIMESTAMP('2020-2-24 08:55:23.57', 'YYYY-MM-DD HH24:MI:SS.FF'),3020785413,2707765433,'Apple Inc.');
+INSERT INTO purchase (trans_id,amount,time,customer_id,account_number,vendor) VALUES (8151856395,'18.02',TO_TIMESTAMP('2020-3-21 16:08:10.97', 'YYYY-MM-DD HH24:MI:SS.FF'),9467398176,1750617660,'Home Depot');
+INSERT INTO purchase (trans_id,amount,time,customer_id,account_number,vendor) VALUES (3809671389,'105.40',TO_TIMESTAMP('2020-4-4 23:09:11.42', 'YYYY-MM-DD HH24:MI:SS.FF'),3959905008,9521663354,'Home Depot');
+INSERT INTO purchase (trans_id,amount,time,customer_id,account_number,vendor) VALUES (9477036152,'310.65',TO_TIMESTAMP('2020-2-8 05:34:37.73', 'YYYY-MM-DD HH24:MI:SS.FF'),6358977970,4046928439,'Costco');
+INSERT INTO purchase (trans_id,amount,time,customer_id,account_number,vendor) VALUES (1814959943,'51.39',TO_TIMESTAMP('2020-2-26 23:33:30.92', 'YYYY-MM-DD HH24:MI:SS.FF'),9357090050,7004734550,'Dos Coyotes');
+INSERT INTO purchase (trans_id,amount,time,customer_id,account_number,vendor) VALUES (7736714353,'4.12',TO_TIMESTAMP('2020-1-19 20:42:30.94', 'YYYY-MM-DD HH24:MI:SS.FF'),7503829163,4004955378,'Posh Bagels');
+INSERT INTO purchase (trans_id,amount,time,customer_id,account_number,vendor) VALUES (2662744397,'148.40',TO_TIMESTAMP('2020-2-7 20:59:26.60', 'YYYY-MM-DD HH24:MI:SS.FF'),6358977970,4046928439,'Home Depot');

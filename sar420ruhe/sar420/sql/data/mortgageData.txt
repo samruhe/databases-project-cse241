@@ -1,0 +1,5 @@
+INSERT INTO mortgage (loan_id,interest_rate,amount,monthly_payment,address_id,customer_id,branch_id) VALUES (8520830451,'11.50','273.67','30.70',7075588165,1436978296,7494036911);
+INSERT INTO mortgage (loan_id,interest_rate,amount,monthly_payment,address_id,customer_id,branch_id) VALUES (1919907190,'12.00','170.32','23.81',1133244331,4069060960,2709552372);
+INSERT INTO mortgage (loan_id,interest_rate,amount,monthly_payment,address_id,customer_id,branch_id) VALUES (2379209606,'6.50','7000.60','6.88',6001317103,4508153796,9409396462);
+INSERT INTO mortgage (loan_id,interest_rate,amount,monthly_payment,address_id,customer_id,branch_id) VALUES (1509703310,'4.00','255.23','32.57',3848779085,6367450911,7494036911);
+INSERT INTO mortgage (loan_id,interest_rate,amount,monthly_payment,address_id,customer_id,branch_id) VALUES (6359675994,'2.00','54.47','13.10',8070682067,7503829163,9849128752);

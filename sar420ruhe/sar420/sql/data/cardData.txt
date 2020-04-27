@@ -1,0 +1,8 @@
+INSERT INTO card (card_number,expiration,security_code,name_on_card) VALUES (7546974991758665,1231,'216','Amanda Vargas');
+INSERT INTO card (card_number,expiration,security_code,name_on_card) VALUES (7855968102812768,0801,'118','Veda Pruitt');
+INSERT INTO card (card_number,expiration,security_code,name_on_card) VALUES (5103668520847956,0604,'108','Calista Henry');
+INSERT INTO card (card_number,expiration,security_code,name_on_card) VALUES (8933553778462941,1024,'597','Quinn Gray');
+INSERT INTO card (card_number,expiration,security_code,name_on_card) VALUES (8744982489281231,0206,'232','Maxine Alford');
+INSERT INTO card (card_number,expiration,security_code,name_on_card) VALUES (9299697122640081,0108,'234','Iola Talley');
+INSERT INTO card (card_number,expiration,security_code,name_on_card) VALUES (5591572837697135,0501,'192','Brenda Lynch');
+INSERT INTO card (card_number,expiration,security_code,name_on_card) VALUES (9174973496960270,0610,'186','Solomon Richmond');

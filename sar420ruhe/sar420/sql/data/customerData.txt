@@ -1,0 +1,13 @@
+INSERT INTO customer (customer_id,name,address_id) VALUES (5744848247,'Armand Vargas',8614615694);
+INSERT INTO customer (customer_id,name,address_id) VALUES (6358977970,'Veda Pruitt',7314632150);
+INSERT INTO customer (customer_id,name,address_id) VALUES (3959905008,'Calista Henry',4926943195);
+INSERT INTO customer (customer_id,name,address_id) VALUES (3645623338,'Quinn Gray',2310358836);
+INSERT INTO customer (customer_id,name,address_id) VALUES (1539597920,'Maxine Alford',5719167138);
+INSERT INTO customer (customer_id,name,address_id) VALUES (9467398176,'Iola Talley',6715294702);
+INSERT INTO customer (customer_id,name,address_id) VALUES (7503829163,'Brenda Lynch',8070682067);
+INSERT INTO customer (customer_id,name,address_id) VALUES (9357090050,'Solomon Richmond',7852892689);
+INSERT INTO customer (customer_id,name,address_id) VALUES (1436978296,'Nora Campbell',7075588165);
+INSERT INTO customer (customer_id,name,address_id) VALUES (4069060960,'Baker Sosa',1133244331);
+INSERT INTO customer (customer_id,name,address_id) VALUES (3020785413,'Noelani Kidd',5320640347);
+INSERT INTO customer (customer_id,name,address_id) VALUES (4508153796,'Chava Roach',6001317103);
+INSERT INTO customer (customer_id,name,address_id) VALUES (6367450911,'Imelda Calhoun',3848779085);

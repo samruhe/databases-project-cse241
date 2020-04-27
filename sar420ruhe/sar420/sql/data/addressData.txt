@@ -1,0 +1,27 @@
+-- customer addresses
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (8614615694,'Ap #974-2962 Primis Ave','Ap #714-8176 Nulla Road','Salt Lake City','Utah','88226');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (7314632150,'Ap #426-7718 Primis Road','9521 Augue St.','Metairie','Louisiana','78463');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (4926943195,'P.O. Box 303, 2885 Velit Av.','2313 Nunc. St.','Lansing','Michigan','35711');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (2310358836,'Ap #470-909 Fringilla, Road','6254 Lorem Ave','Great Falls','Montana','27530');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (5719167138,'Ap #818-7685 Duis St.','Ap #541-8620 Suscipit, Rd.','Los Angeles','California','91308');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (6715294702,'2831 Nunc. Street','Ap #416-6965 Augue Rd.','Allentown','Pennsylvania','81896');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (8070682067,'Ap #569-5192 Dictum Road','7925 Pede, Avenue','Olympia','Washington','60326');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (7852892689,'P.O. Box 267, 6854 Nam St.','P.O. Box 119, 7337 Non, Road','Honolulu','Hawaii','41400');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (7075588165,'Ap #379-4590 Pede, Rd.','Ap #177-5873 Auctor Avenue','Bangor','Maine','47369');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (1133244331,'895 Turpis Avenue','431-295 Eu Rd.','Fairbanks','Alaska','99629');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (5320640347,'506-4194 Ornare Road','428-323 Ultricies Ave','San Antonio','Texas','57322');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (6001317103,'5885 Lorem, Av.','537-4276 Enim, Road','Juneau','Alaska','99939');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (3848779085,'P.O. Box 454, 2679 Pretium St.','P.O. Box 293, 5597 Orci Road','Nashville','Tennessee','72360');
+
+
+-- branch addresses
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (5984730376,'6289 Augue Road','641-875 Sociosqu Ave','Lexington','Kentucky','12848');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (9005818039,'Ap #196-3146 At Ave','Ap #193-7162 Arcu. St.','Helena','Montana','51745');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (5648464957,'5534 Commodo Road','P.O. Box 917, 1710 Dolor, Ave','West Valley City','Utah','90093');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (4602000299,'365-8866 Sed Avenue','6233 Ac Road','Chattanooga','Tennessee','70359');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (5316128627,'Ap #223-4742 Viverra. Rd.','Ap #146-6560 Et Avenue','Birmingham','Alabama','36727');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (9887602234,'751-7443 Sollicitudin Av.','895-7687 Lorem Av.','Bear','Delaware','38498');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (6044733304,'P.O. Box 422, 336 Cum Ave','Ap #658-4517 Lorem Street','Newark','Delaware','85671');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (3597660503,'P.O. Box 815, 7145 Ac Road','841-9989 Vulputate Ave','Olathe','Kansas','42279');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (9269512697,'131-1798 Non St.','P.O. Box 801, 6318 Elit. Road','Cedar Rapids','Iowa','69290');
+INSERT INTO address (address_id,line1,line2,city,state,zip) VALUES (7612313284,'Ap #818-3449 Condimentum St.','6435 Turpis. Rd.','Gaithersburg','Maryland','28232');

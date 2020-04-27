@@ -1,0 +1,48 @@
+-- updates the balance in a savings account when the balance in account is changed
+create or replace trigger updateSavings
+after update of balance on account
+referencing old as old new as new
+for each row
+
+begin
+    update savings_acct
+    set balance=:new.balance
+    where account_number=:old.account_number;
+end;
+
+
+-- updates the balance in a checking account when the balance in account is changed
+create or replace trigger updateChecking
+after update of balance on account
+referencing old as old new as new
+for each row
+
+begin
+    update checking_acct
+    set balance=:new.balance
+    where account_number=:old.account_number;
+end;
+
+
+-- adds the account information to the main account table when a new checking account is added to the checking_acct table
+create or replace trigger addToAccount
+after insert on checking_acct
+referencing old as old new as new
+for each row
+
+begin
+    insert into account (account_number, balance, minimum_balance, customer_id)
+    values (:new.account_number, :new.balance, :new.minimum_balance, :new.customer_id);
+end;
+
+
+-- adds the account information to the main account table when a new savings account is added to the savings_acct table
+create or replace trigger addToAccountFromSavings
+after insert on savings_acct
+referencing old as old new as new
+for each row
+
+begin
+    insert into account (account_number, balance, minimum_balance, customer_id)
+    values (:new.account_number, :new.balance, :new.minimum_balance, :new.customer_id);
+end;

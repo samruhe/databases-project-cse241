@@ -1,0 +1,4 @@
+INSERT INTO unsecured (loan_id,interest_rate,amount,monthly_payment,customer_id,branch_id) VALUES (2433863716,'16.00','10011.12','38.49',6358977970,7494036911);
+INSERT INTO unsecured (loan_id,interest_rate,amount,monthly_payment,customer_id,branch_id) VALUES (2665870723,'11.00','185.43','6.06',3959905008,7494036911);
+INSERT INTO unsecured (loan_id,interest_rate,amount,monthly_payment,customer_id,branch_id) VALUES (1329169169,'17.00','188.86','33.99',1539597920,2709552372);
+INSERT INTO unsecured (loan_id,interest_rate,amount,monthly_payment,customer_id,branch_id) VALUES (6278630615,'1.50','63.81','4.97',6358977970,9849128752);

@@ -1,0 +1,224 @@
+-- This order works as is --
+drop table credit_card;
+drop table mortgage;
+drop table unsecured;
+drop table atm_withdraw;
+drop table teller_withdraw;
+drop table teller_deposit;
+drop table purchase;
+drop table atm;
+drop table teller;
+drop table debit_card;
+drop table savings_acct;
+drop table checking_acct;
+drop table account;
+drop table branch;
+drop table customer;
+drop table address;
+
+-- This order works as is --
+create table address (
+	address_id numeric(10),
+	line1 varchar(30),
+	line2 varchar(30),
+	city varchar(20),
+	state varchar(15),
+	zip numeric(5),
+	primary key(address_id)
+);
+
+create table branch (
+	branch_id numeric(10),
+	address_id numeric(10),
+	primary key(branch_id),
+	foreign key (address_id) references
+	address on delete set null
+);
+
+create table customer (
+	customer_id numeric(10),
+	name varchar(20),
+	address_id numeric(10),
+	primary key(customer_id),
+	foreign key (address_id) references
+	address on delete set null
+);
+
+create table atm (
+	branch_id numeric(10),
+	address_id numeric(10),
+	primary key(branch_id),
+	foreign key (branch_id) references
+	branch on delete set null,
+	foreign key (address_id) references
+	address on delete set null
+);
+
+create table teller (
+	branch_id numeric(10),
+	address_id numeric(10),
+	primary key(branch_id),
+	foreign key (branch_id) references
+	branch on delete set null,
+	foreign key (address_id) references
+	address on delete set null
+);
+
+create table account (
+	account_number numeric(10),
+	balance numeric(12, 2),
+	minimum_balance numeric(5, 2),
+	customer_id numeric(10),
+	primary key(account_number),
+	foreign key (customer_id) references
+	customer on delete set null
+);
+
+create table savings_acct (
+	account_number numeric(10),
+	balance numeric(12, 2),
+	minimum_balance numeric(5, 2),
+	customer_id numeric(10),
+	penalty numeric(5, 2),
+	primary key(account_number),
+	foreign key (account_number) references
+	account on delete set null,
+	foreign key (customer_id) references
+	customer on delete set null
+);
+
+create table checking_acct (
+	account_number numeric(10),
+	balance numeric(12, 2),
+	minimum_balance numeric(5, 2),
+	customer_id numeric(10),
+	primary key(account_number),
+	foreign key (account_number) references
+	account on delete set null,
+	foreign key (customer_id) references
+	customer on delete set null
+);
+
+create table debit_card (
+	card_number numeric(16),
+	expiration numeric(4),
+	security_code numeric(3),
+	name_on_card varchar(20) not null,
+	pin numeric(10),
+	account_number numeric(10),
+	customer_id numeric(10),
+	primary key(card_number, expiration, security_code),
+	foreign key (account_number) references
+	checking_acct on delete set null,
+	foreign key (customer_id) references
+	customer on delete set null
+);
+
+create table credit_card (
+	card_number numeric(16),
+	expiration numeric(4),
+	security_code numeric(3),
+	credit_limit numeric(7,2),
+	outstanding_balance numeric(7,2),
+	name_on_card varchar(20) not null,
+	customer_id numeric(10),
+	branch_id numeric(10),
+	primary key(card_number, expiration, security_code),
+	foreign key (customer_id) references
+	customer on delete set null, 
+	foreign key (branch_id) references
+	branch on delete set null
+);
+
+create table mortgage (
+	loan_id numeric(10),
+	interest_rate numeric(5, 2) check (interest_rate >= 0),
+	amount numeric(10, 2) check (amount >= 0),
+	monthly_payment numeric(10, 2) check (monthly_payment >= 0),
+	address_id numeric(10),
+	customer_id numeric(10),
+	branch_id numeric(10),
+	primary key(loan_id),
+	foreign key (address_id) references
+	address on delete set null,
+	foreign key (customer_id) references
+	customer on delete set null,
+	foreign key (branch_id) references
+	branch on delete set null
+);
+
+create table unsecured (
+	loan_id numeric(10),
+	interest_rate numeric(5, 2) check (interest_rate >= 0),
+	amount numeric(10, 2) check (amount >= 0),
+	monthly_payment numeric(10, 2) check (monthly_payment >= 0),
+	customer_id numeric(10),
+	branch_id numeric(10),
+	primary key(loan_id),
+	foreign key (customer_id) references
+	customer on delete set null,
+	foreign key (branch_id) references
+	branch on delete set null
+);
+
+create table atm_withdraw (
+	trans_id numeric(10),
+	amount numeric(10, 2),
+	time timestamp,
+	customer_id numeric(10),
+	branch_id numeric(10),
+	account_number numeric(10),
+	primary key(trans_id),
+	foreign key (customer_id) references
+	customer on delete set null,
+	foreign key (account_number) references
+	checking_acct on delete set null,
+	foreign key (branch_id) references
+	atm on delete set null
+);
+
+create table teller_withdraw (
+	trans_id numeric(10),
+	amount numeric(10, 2),
+	time timestamp,
+	customer_id numeric(10),
+	branch_id numeric(10),
+	account_number numeric(10),
+	primary key(trans_id),
+	foreign key (customer_id) references
+	customer on delete set null,
+	foreign key (branch_id) references
+	teller on delete set null,
+	foreign key (account_number) references
+	account on delete set null
+);
+
+create table teller_deposit (
+	trans_id numeric(10),
+	amount numeric(10, 2),
+	time timestamp,
+	customer_id numeric(10),
+	branch_id numeric(10),
+	account_number numeric(10),
+	primary key(trans_id),
+	foreign key (customer_id) references
+	customer on delete set null,
+	foreign key (branch_id) references
+	teller on delete set null,
+	foreign key (account_number) references
+	account on delete set null
+);
+
+create table purchase (
+	trans_id numeric(10),
+	amount numeric(10, 2),
+	time timestamp,
+	customer_id numeric(10),
+	account_number numeric(10),
+	vendor varchar(20),
+	primary key(trans_id),
+	foreign key (customer_id) references
+	customer on delete set null,
+	foreign key (account_number) references
+	account on delete set null
+);

@@ -1,0 +1,8 @@
+INSERT INTO savings_acct (account_number,balance,minimum_balance,customer_id,penalty) VALUES (3851037563,286.83,350.00,1436978296,'30.00');
+INSERT INTO savings_acct (account_number,balance,minimum_balance,customer_id,penalty) VALUES (1851208574,479.71,300.00,1539597920,'90.00');
+INSERT INTO savings_acct (account_number,balance,minimum_balance,customer_id,penalty) VALUES (2707765433,60224.36,500.00,3020785413,'5.00');
+INSERT INTO savings_acct (account_number,balance,minimum_balance,customer_id,penalty) VALUES (9521663354,53448.19,100.00,3959905008,'20.00');
+INSERT INTO savings_acct (account_number,balance,minimum_balance,customer_id,penalty) VALUES (6937176692,476.30,200.00,4069060960,'15.00');
+INSERT INTO savings_acct (account_number,balance,minimum_balance,customer_id,penalty) VALUES (4004955378,73424.27,250.00,7503829163,'60.00');
+INSERT INTO savings_acct (account_number,balance,minimum_balance,customer_id,penalty) VALUES (7004734550,7349.05,200.00,9357090050,'90.00');
+INSERT INTO savings_acct (account_number,balance,minimum_balance,customer_id,penalty) VALUES (1750617660,4217.84,100.00,9467398176,'10.00');

@@ -1,0 +1,2 @@
+INSERT INTO debit_card (card_number,expiration,security_code,name_on_card,pin,account_number,customer_id) VALUES (5591572837697135,0501,192,'Brenda Lynch',8745,5219205067,7503829163);
+INSERT INTO debit_card (card_number,expiration,security_code,name_on_card,pin,account_number,customer_id) VALUES (9174973496960270,0610,186,'Solomon Richmond',8462,2911114419,9357090050);

@@ -1,0 +1,10 @@
+INSERT INTO branch (branch_id,address_id) VALUES (7084399320,5984730376);
+INSERT INTO branch (branch_id,address_id) VALUES (3776269588,9005818039);
+INSERT INTO branch (branch_id,address_id) VALUES (2965370101,5648464957);
+INSERT INTO branch (branch_id,address_id) VALUES (7377126825,5316128627);
+INSERT INTO branch (branch_id,address_id) VALUES (2339126823,6044733304);
+INSERT INTO branch (branch_id,address_id) VALUES (7572861764,3597660503);
+INSERT INTO branch (branch_id,address_id) VALUES (9409396462,9269512697);
+INSERT INTO branch (branch_id,address_id) VALUES (2709552372,7612313284);
+INSERT INTO branch (branch_id,address_id) VALUES (7494036911,9887602234);
+INSERT INTO branch (branch_id,address_id) VALUES (9849128752,4602000299);
