@@ -50,7 +50,7 @@ public class TellerTransaction {
     }
 
     private static ArrayList<String> findAccounts(String id, Connection db) {
-        try (PreparedStatement s = db.prepareStatement("(SELECT account_number, balance, minimum_balance, 'Savings' as type FROM savings_acct WHERE customer_id=?) UNION (SELECT account_number, balance, minimum_balance, 'Checking' as type FROM checking_acct WHERE customer_id=?)")
+        try (PreparedStatement s = db.prepareStatement("(SELECT account_number, balance, minimum_balance, 'Savings' as type FROM savings_acct WHERE customer_id=?) UNION (SELECT account_number, balance, minimum_balance, 'Checking' as type FROM checking_acct WHERE customer_id=?) ORDER BY TYPE")
         ){
             s.setString(1, id);
             s.setString(2, id);
